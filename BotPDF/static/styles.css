@@ -1,0 +1,42 @@
+/* static/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form {
+    margin-top: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+div#chat-container {
+    margin-top: 20px;
+}
+
+div#chat-container p {
+    margin: 5px 0;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 8px;
+    margin-right: 5px;
+}
+
+button {
+    padding: 8px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
