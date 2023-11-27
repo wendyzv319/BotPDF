@@ -8,7 +8,7 @@ The aim of this project is to utilize tools such as LangChain and FAISS to creat
 
 ## Installing / Getting started
     > git clone https://github.com/wendyzv319/BotPDF.git
-    > cd /chatgpt_kws
+    > cd /BotPDF
     Run the batch file:
     > .\install.bat
     Then, run:
@@ -30,4 +30,4 @@ The aim of this project is to utilize tools such as LangChain and FAISS to creat
 - OPENAI_KEY: [OpenAI key](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)
 
 
-To work with openai in your notebooks you need to add the variable `OPENAI_API_KEY` to a .env. Check your in the follow link [API key](https://beta.openai.com/account/api-keys) .
+To work with openai you need to add the variable `OPENAI_API_KEY` to a .env. Check your in the follow link [API key](https://beta.openai.com/account/api-keys) .
