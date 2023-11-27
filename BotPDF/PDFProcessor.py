@@ -23,8 +23,8 @@ class PDFProcessor:
         self.doctran = Doctran(openai_api_key=api_key)
         self.docs = []
         self.qa_db = None
-        self.qa=None
-        self.qa_docs=[]
+        self.qa = None
+        self.qa_docs = []
         self.chat_history = []
 
     def load_pdf(self, pdf_path):
@@ -37,20 +37,26 @@ class PDFProcessor:
 
         except Exception as e:
             # Captura cualquier excepción y proporciona información sobre el error
-            error_message = f"Error al cargar el PDF: {str(e)}"
+            error_message = f"Error : {str(e)}"
+            print(error_message)
             return False
 
     async def process_loaded_pdf_async(self):
         try:
 
-            for tes in self.loaded_content[:5]:
+            print(f"Longitud : {len(self.loaded_content)}")
+
+            lengthToAnalize = len(self.loaded_content) if (len(self.loaded_content) < 8) else 8
+
+            for tes in self.loaded_content[:lengthToAnalize]:
                 text = tes.page_content
                 doc = self.doctran.parse(content=text)
                 self.docs.append(await doc.interrogate().execute())
-            qa_docs = []
+
             for doc in self.docs:
-                self.qa_docs.extend([Document(page_content=json.dumps(qa), metadata={"raw_text": doc.raw_content}) for qa in
-                                doc.extracted_properties["questions_and_answers"]])
+                self.qa_docs.extend(
+                    [Document(page_content=json.dumps(qa), metadata={"raw_text": doc.raw_content}) for qa in
+                     doc.extracted_properties["questions_and_answers"]])
 
             qa_db = FAISS.from_documents(self.qa_docs, self.embeddings)
             # create conversation chain
@@ -59,7 +65,8 @@ class PDFProcessor:
 
         except Exception as e:
             # Captura el error
-            error_message = f"Error al cargar el PDF: {str(e)}"
+            error_message = f"Error : {str(e)}"
+            print(error_message)
             return False
 
     def process_loaded_pdf(self):
@@ -83,7 +90,15 @@ class PDFProcessor:
         return qa
 
     def bot_response(self, query):
+        try:
+            result = self.qa({"question": query, "chat_history": self.chat_history})
 
-        result = self.qa({"question": query, "chat_history": self.chat_history})
+            return result.get("answer")
 
-        return result.get("answer")
+        except Exception as e:
+            # Captura cualquier excepción y proporciona información sobre el error
+            error_message = f"Error : {str(e)}"
+            print(error_message)
+            return None
+
+
