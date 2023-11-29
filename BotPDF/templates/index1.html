@@ -88,16 +88,18 @@
         <p id="file-info">Load the paper or thesis to be analyzed</p>
         <form id="file-form" enctype="multipart/form-data">
             <input type="file" name="file" class="form-control-file mb-3">
-            <button type="button" onclick="uploadFile()" class="btn btn-primary">Upload file</button>
+            <button id="uploadBtn" type="button" onclick="uploadFile()" class="btn btn-primary">Upload file</button>
         </form>
 
         <div id="message" class="mt-3" style="display: none;">
-            <!-- Aquí se mostrará el mensaje y el icono -->
+            <div class="alert alert-success"><i class="fas fa-check-circle"></i> File uploaded successfully</div>
         </div>
         <button id="cleanBtn" class="btn btn-success mt-3"  onclick="clean()">Clean</button>
         <button id="procesarBtn" onclick="processDocument()" class="btn btn-success mt-3" style="display: none;" disabled>Process document</button>
         <button id="exportBtn" onclick="exportChat()" class="btn btn-success mt-3" style="display: none;" >Export Chat</button>
-
+        <div id="messageError" class="mt-3" style="display: none;">
+            <div class="alert alert-danger"><i class="fa fa-bug"></i> Error processing the document. For more information check the console</div></div>
+        </div>
 
 <div id="chat-container">
     <ul id="chat-messages"></ul>
@@ -122,7 +124,7 @@
 
     <script>
         function showSuccessMessage() {
-            $('#message').html('<div class="alert alert-success"><i class="fas fa-check-circle"></i> File uploaded successfully</div>');
+            //$('#message').html('');
             $('#message').show();
             $('#procesarBtn').show().prop('disabled', false);
         }
@@ -160,14 +162,28 @@
                 $.blockUI({ message: 'Processing document...' });
             },
             success: function(response) {
-                // Procesamiento exitoso, realiza acciones según sea necesario
-                console.log('Documento procesado con éxito:', response.result);
+            if(response.code==1){
+            // Error al procesar el documento
+
+                $('#messageError').show();
+
+                console.log('Error al procesar el documento');
+            }else{
+            // Procesamiento exitoso
+                console.log('Documento procesado con éxito');
                 $('#chat-container').show();
                 $('#exportBtn').show();
+                $('#uploadBtn').show().prop('disabled', true);
+            }
+
             },
             error: function(error) {
-                // Error al procesar el documento, realiza acciones según sea necesario
-                console.log('Error al procesar el documento:', error);
+
+                // Error al procesar el documento
+
+                $('#messageError').show();
+
+                console.log('Error al procesar el documento');
             },
             complete: function () {
                 $.unblockUI();

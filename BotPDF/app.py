@@ -58,17 +58,18 @@ def process_loaded_pdf():
 
         if not result:
             print(f"Error al procesar el PDF")
-            return jsonify({'status': 'error', 'message': "error_message"})
+            return jsonify({'status': 'error', 'message': "error_message", 'code': 1})
         else:
             print("PDF procesado correctamente")
             # Realiza acciones adicionales según sea necesario, como procesar el contenido del PDF
-            return jsonify({'status': 'success', 'message': 'Archivo cargado correctamente'})
+            return jsonify({'status': 'success', 'message': 'Archivo cargado correctamente', 'code': 0})
 
 
     except Exception as e:
         error_message = f"Error al procesar el PDF: {str(e)}"
         print(error_message)
-        return jsonify({'status': 'error', 'message': error_message})
+        return jsonify({'status': 'error', 'message': error_message, 'code': 1})
+
 
 @app.route('/get_bot_response', methods=['POST'])
 def get_bot_response():
@@ -82,8 +83,6 @@ def get_bot_response():
         return jsonify({'bot_response': bot_response})
     except Exception as e:
         return jsonify({'error': str(e)})
-
-
 
 
 if __name__ == '__main__':
