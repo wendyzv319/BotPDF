@@ -37,16 +37,15 @@ def upload_file():
         print(f'result is: {result}')
         if not result:
             print(f"Error al cargar el PDF")
-            return jsonify({'status': 'error', 'message': "error_message"})
+            return jsonify({'status': 'error', 'message': "Error loading file", 'code': 1})
         else:
             print("PDF cargado correctamente")
-            # Realiza acciones adicionales según sea necesario, como procesar el contenido del PDF
-            return jsonify({'status': 'success', 'message': 'Archivo cargado correctamente'})
+            return jsonify({'status': 'success', 'message': 'Archivo cargado correctamente', 'code': 0})
 
     except Exception as e:
         error_message = f"Error al cargar el PDF: {str(e)}"
         print(error_message)
-        return jsonify({'status': 'error', 'message': error_message})
+        return jsonify({'status': 'error', 'message': error_message, 'code': 1})
 
 
 @app.route('/process', methods=['POST'])
@@ -76,7 +75,7 @@ def get_bot_response():
     try:
         print("Bot response")
         user_input = request.form['user_input']
-        print(user_input)
+        # print(user_input)
 
         bot_response = pdf_processor.bot_response(user_input)
 

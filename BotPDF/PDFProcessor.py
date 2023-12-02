@@ -32,6 +32,11 @@ class PDFProcessor:
             loader = PyPDFLoader(pdf_path)
             document_content = loader.load_and_split()
             self.loaded_content = document_content
+            self.docs = []
+            self.qa_db = None
+            self.qa = None
+            self.qa_docs = []
+            self.chat_history = []
 
             return True  # No hay error
 
