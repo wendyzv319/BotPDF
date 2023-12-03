@@ -8,11 +8,11 @@ The aim of this project is to utilize tools such as LangChain and FAISS to creat
 
 ## Installing / Getting started
     > git clone https://github.com/wendyzv319/BotPDF.git
-    > cd /BotPDF/BotPDF
+    > cd BotPDF/BotPDF
     Run the batch file:
-    > .\install.bat
+    > install.bat
     Then, run:
-    > .\run.bat
+    > run.bat
    
 ## Developing
 
