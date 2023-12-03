@@ -8,11 +8,14 @@ The aim of this project is to utilize tools such as LangChain and FAISS to creat
 
 ## Installing / Getting started
     > git clone https://github.com/wendyzv319/BotPDF.git
+	From the command prompt access the Boot PDF folder that is located within the repository that you just cloned
     > cd BotPDF/BotPDF
     Run the batch file:
     > install.bat
     Then, run:
     > run.bat
+   The application will likely run on http://127.0.0.1:8000/ (port 8000 is configured within the ".env" file).
+   
    
 ## Developing
 
@@ -24,6 +27,10 @@ The aim of this project is to utilize tools such as LangChain and FAISS to creat
 - Flask-cors v3.0.10
 - requests v2.31.0
 - python-dotenv v1.0.0
+- langchain v0.0.240
+- doctran v0.0.9
+- pypdf v3.15.4
+- faiss-cpu v1.7.4
   
 ### Prerequisites
 - Python 3.10.7
@@ -31,3 +38,7 @@ The aim of this project is to utilize tools such as LangChain and FAISS to creat
 
 
 To work with openai you need to add the variable `OPENAI_API_KEY` to a .env. Check your in the follow link [API key](https://beta.openai.com/account/api-keys) .
+
+## Contact Info
+
+For any questions or information you need about the project, you can send an email to: wendyzv.319@gmail.com
